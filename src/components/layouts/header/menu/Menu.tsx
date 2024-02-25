@@ -9,14 +9,14 @@ export function Menu() {
             <div id="all_categories" className="flex relative cursor-pointer bg-green-200 gap-2.5 text-white px-4 py-3 rounded-[5px] items-center">
                 <IconBox className={"icon-apps"} size={24} title={"Browse All Categories"} titleClassName={"text-medium"}/>
                 <IconBox className={"icon-angle-small-down"} size={24}/>
-                <div id="all_categories_box" className="hidden absolute z-20 bg-white left-0 top-16 w-[500px] rounded-[5px] border-[1px] border-green-300 p-[30px] hover:cursor-default">
-                    <div id="all_cat_inner_box" className="flex flex-wrap justify-between gap-y-[15px]">
+                <div id="all_categories_box" className="hidden absolute z-20 bg-white left-0 top-16 w-[550px] border-[1px] border-light_gray rounded-[5px] p-6 hover:cursor-default">
+                    <div id="all_cat_inner_box" className="flex flex-wrap justify-between gap-4">
                         {
                             BrowsCateguryMock.map((item, index)=>{
-                                return<IconBox key={index} link={item.link} className={item.icon}  path={item.path} title={item.title} size={30} titleClassName={"text-heading-sm text-blue-300"} linkClass={"flex items-center gap-3.5 rounded-[5px] lg:border-[1px] lg:border-gray-300 py-2.5 basis-[calc(50%-8px)] justify-start pl-4 lg:hover:border-green-300 cursor-pointer"}/>
+                                return<IconBox key={index} link={item.link} className={item.icon}  path={item.path} title={item.title} size={35} titleClassName={"text-heading-sm text-blue-300"} linkClass={"gap-3.5 rounded-[5px] shadow-sm shadow-primary hover:shadow-md hover:scale-[99%] p-4 basis-[calc(50%-8px)]"}/>
                             })
                         }
-                        <div id="more_categories" className="cursor-pointer flex gap-4 items-center justify-center w-full mt-[17px]">
+                        <div id="more_categories" className="cursor-pointer flex gap-4 items-center justify-center w-full p-3 rounded-[5px] shadow-sm shadow-primary hover:shadow-md hover:scale-[99%]">
                             <IconBox className={"icon-add"} size={24}/>
                             <div className="text-heading-sm text-blue-300">More Categories</div>
                         </div>

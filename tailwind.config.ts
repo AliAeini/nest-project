@@ -129,6 +129,8 @@ const config: Config = {
         transparent: 'rgba(1,1,1,0)',
         red: '#ef4f4f',
         white: '#FFFFFF',
+        primary: 'rgba(59, 183, 126, 1)',
+        light_gray: 'rgb(244 246 250)',
         gray: {
           100: '#F4F6FA',
           200: '#E5E5E5',

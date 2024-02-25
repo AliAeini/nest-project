@@ -3,6 +3,8 @@ import "@/styles/icons.css";
 import type { AppProps } from "next/app";
 import {Layouts} from "@/components";
 import {Lato, Quicksand} from "next/font/google";
+import "swiper/css";
+import "swiper/css/autoplay"
 
 const quicksand = Quicksand({
     subsets: ["latin"]
