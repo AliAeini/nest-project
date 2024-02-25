@@ -7,8 +7,7 @@ export function Footer() {
             <div className="mb-[68px]">
                 <div
                     className="rounded-[6px] md:rounded-[14px] lg:rounded-[30px] bg-hero-pattern bg-[rgba(59,128,126,.2)] bg-opacity-20 bg-cover bg-top bg-no-repeat flex justify-between items-center mt-[38px] relative">
-                    <div
-                        className="min-h-[160px] pl-3 pt-3 sm:pl-4 sm:pt4 md:pl-6 md:pt-6 lg:pl-10 lg:py-10 xl:pl-14 xl:py-14 2xl:py-[72px] 2xl:pl-[72px]">
+                    <div className="min-h-[160px] pl-3 pt-3 sm:pl-4 sm:pt4 md:pl-6 md:pt-6 lg:pl-10 lg:py-10 xl:pl-14 xl:py-14 2xl:py-[72px] 2xl:pl-[72px]">
                         <h2 className="max-w-[60%] text-heading5 sm:text-heading4 md:text-heading3 lg:text-heading2 tracking-[-0.04%] text-blue-300">Stay
                             home & get your daily needs from our shop</h2>
                         <div
@@ -21,33 +20,34 @@ export function Footer() {
             </div>
             <div
                 className="flex flex-col md:flex-row justify-between flex-wrap gap-[16px] divide-y-2 md:divide-y-0 mb-[70px]">
-                <div className="max-w-[346px]">
+                <div className="max-w-[346px] flex flex-col gap-3">
                     <Logo/>
                     <div className="font-lato text-medium mt-4 lg:mt-6">Pellentesque posuere orci lobortis</div>
-                    <div className="flex items-start gap-2.5 mt-4 lg:mt-6">
+                    <div className="flex justify-start items-start gap-2.5">
                         <IconBox className={"icon-marker-brand"}/>
                         <div className="font-lato text-medium text-blue-300">
                             <span className="font-bold">Address:</span>
                             5171 W Campbell Ave undefined Kent, Utah 53127 United States
                         </div>
                     </div>
-                    <div className="flex items-start gap-2.5 mt-2 lg:mt-3">
+                    <div className="flex items-start gap-2.5">
                         <IconBox className={"icon-headset text-brand1"}/>
                         <div className="font-lato text-medium text-blue-300"><span
                             className="font-bold">Call Us:</span> (+91) - 540-025-124553
                         </div>
                     </div>
-                    <div className="flex items-start gap-2.5 mt-2 lg:mt-3">
+                    <div className="flex items-start gap-1">
                         <IconBox className={"icon-paper-plane text-brand1"} size={24}/>
                         <div className="font-lato text-medium text-blue-300">
                             <span className="font-bold">Email:</span>
                             contact@nestmart.com
                         </div>
                     </div>
-                    <div className="flex items-start gap-2.5 mt-2 lg:mt-3">
+                    <div className="flex items-start gap-2.5">
                         <IconBox className={"icon-time-fast text-brand1"}/>
-                        <div className="font-lato text-medium text-blue-300"><span
-                            className="font-bold">Hours:</span> 10:00 - 18:00, Mon - Sat
+                        <div className="font-lato text-medium text-blue-300">
+                            <span className="font-bold">Hours:</span>
+                            10:00 - 18:00, Mon - Sat
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ export function Footer() {
                         <IconBox className={"icon-down-dark inline-block sm:hidden"} size={24}/>
                     </div>
                     <ul className="hidden md:flex flex-col gap-2.5">
-                        <li className="font-lato text-medium text-blue-300 mt-4 lg:mt-6"><a href="#">About Us</a></li>
+                        <li className="font-lato text-medium text-blue-300 mt-4 lg:mt-6"><Link href="#">About Us</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Delivery Information</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Privacy Policy</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Terms & Conditions</Link></li>
@@ -72,8 +72,7 @@ export function Footer() {
                         <IconBox className={"icon-down-dark inline-block sm:hidden"} size={24}/>
                     </div>
                     <ul className="hidden md:flex flex-col gap-2.5">
-                        <li className="font-lato text-medium text-blue-300 mt-4 lg:mt-6"><Link href="#">Search Terms</Link>
-                        </li>
+                        <li className="font-lato text-medium text-blue-300 mt-4 lg:mt-6"><Link href="#">Search Terms</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Advanced Search</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Help & FAQ's</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Store Location</Link></li>
