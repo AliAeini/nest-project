@@ -9,6 +9,17 @@
         position: relative;
     }
 }
+::-webkit-scrollbar {
+    width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
 @layer components {
     .btn {
         @apply text-white bg-green-200 rounded-[10px] px-[35px] py-[20px] text-medium cursor-pointer font-quickSand shadow-c;
