@@ -30,7 +30,7 @@ export function MiniProductSlider() {
                                 <div className="basis-1/2 flex flex-col justify-between">
                                     <h3 className="text-heading6 xl:text-heading5 2xl:text-heading4 text-blue-300">{item.title}</h3>
                                     <Link href={item.link} className="mt-6 pl-[15px] pr-2.5 py-2 bg-green-200 hover:bg-yellow-100 rounded-[3px] cursor-pointer inline-flex max-w-max items-center gap-2.5">
-                                        <div className="text-xsmall text-white">Shop now</div>
+                                        <div className="text-small text-white">Shop now</div>
                                         <IconBox className={"icon-arrow-small-right"} size={24}/>
                                     </Link>
                                 </div>

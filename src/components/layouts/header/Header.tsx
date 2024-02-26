@@ -1,5 +1,6 @@
 import {IconBox, Logo, Menu, SearchForm} from "@/components";
 import Link from "next/link";
+import { twMerge } from 'tailwind-merge'
 
 export function Header() {
     return (
@@ -23,7 +24,6 @@ export function Header() {
                     <span className="w-full h-[1.5px] bg-black inline-block rounded"></span>
                 </button>
             </div>
-
             <div className="border-gray-200 border-y h">
                 <div className=" container transition-all w-4/5 rounded-[24px] lg:rounded-[0px] lg:w-auto flex absolute top-0 bottom-0 -left-[100%] lg:static flex-col lg:flex-row justify-start lg:justify-between items-start pt-[16px] pl-[24px] lg:py-[13px] lg:items-center h-[100vh] bg-white lg:h-[70px] mobile-menu z-50">
                     <Menu/>
@@ -40,12 +40,7 @@ export function Header() {
                 </div>
                 <div className="container flex justify-between lg:hidden pt-[20px] pb-[16px] items-end">
                     <div className="border-[1px] border-green-150 rounded-[5px] w-full max-w-[220px] p-[6px]">
-                        {/*<form name="search-form" action="#" method="post" className="flex items-center">*/}
-                        {/*    <input type="text" name="search_text" placeholder="Search for items"*/}
-                        {/*           className="text-xsmall text-gray-400 border-gray-300 w-full focus:outline-none"/>*/}
-                        {/*    <button type="submit"><i className="icon-search text-[16px]"></i></button>*/}
-                        {/*</form>*/}
-                        <SearchForm inputclassName={"py-[10px]"}/>
+                        <SearchForm inputclassName={"py-0"}/>
                     </div>
                     <ul className="flex gap-5">
                         <li className="flex gap-2 cursor-pointer">

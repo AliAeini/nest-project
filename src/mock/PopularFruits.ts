@@ -8,7 +8,7 @@ export const popularFruits = [
         unit: 'gram',
         price: 3000,
         sale_price: 200,
-        label: 'Hot',
+        label: 'Sale',
     },
     {
         title: "All Natural Italian-Style Chicken Meatballs",
@@ -19,7 +19,6 @@ export const popularFruits = [
         unit: 'gram',
         price: 3000,
         sale_price: 200,
-        label: 'sale',
     },
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
