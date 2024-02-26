@@ -3,7 +3,7 @@ import {
     BestSellersSlider,
     DealsOfDay,
     FeaturedCategories,
-    IconBox, ProductDealsCard,
+    IconBox, ProductDealsCard, ProductListSlider,
     Section,
     SimpleProductSlider
 } from "@/components";
@@ -82,6 +82,9 @@ export default function Home() {
                  </Link>
              </div>
              <DealsOfDay sliderData={DealsOfTheDaysMock}/>
+         </Section>
+         <Section>
+             <ProductListSlider/>
          </Section>
      </>
 

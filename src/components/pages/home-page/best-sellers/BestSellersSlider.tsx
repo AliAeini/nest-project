@@ -3,18 +3,7 @@ import {Autoplay} from "swiper/modules";
 import {SimpleProductCard} from "@/components";
 
 interface Props {
-    sellersData: Array<{
-        title: string,
-        image: string
-        category: string,
-        rate: number,
-        weight: number,
-        unit: string,
-        price: number,
-        label: string,
-        sold:number,
-        total: number,
-    }>
+    sellersData: Array<any>
 }
 
 export function BestSellersSlider({sellersData}: Props) {

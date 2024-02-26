@@ -1,4 +1,4 @@
-import {Badge, IconBox, ImageVeiw, Rating} from "@/components";
+import {Badge, IconBox, ImageVeiw, PriceText, Rating} from "@/components";
 import Link from "next/link";
 
 interface Props{
@@ -49,17 +49,7 @@ export function SimpleProductCard({cardData}:Props) {
                         <>
                             <div className="flex items-center justify-between mt-3">
                                 <div>
-                                    {
-                                        cardData.sale_price ?
-                                            <div>
-                                                <span
-                                                    className="text-heading5 text-green-200">{cardData.sale_price}</span>
-                                                <span
-                                                    className="text-heading-sm line-through text-gray-500">{cardData.price}</span>
-                                            </div>
-                                            :
-                                            <span className="text-heading5 text-green-200">{cardData.price}</span>
-                                    }
+                                   <PriceText price={cardData.price} sale_price={cardData.sale_price}/>
                                 </div>
                             </div>
                             <div className="mt-[15px] bg-gray-200 h-[4px] w-full rounded-[2px]">
@@ -76,17 +66,7 @@ export function SimpleProductCard({cardData}:Props) {
                         </>
                         :
                         <div className="flex items-center justify-between mt-3">
-                            {
-                                cardData.sale_price ?
-                                    <div>
-                                                <span
-                                                    className="text-heading5 text-green-200">{cardData.sale_price}</span>
-                                        <span
-                                            className="text-heading-sm line-through text-gray-500">{cardData.price}</span>
-                                    </div>
-                                    :
-                                    <span className="text-heading5 text-green-200">{cardData.price}</span>
-                            }
+                           <PriceText price={cardData.price} sale_price={cardData.sale_price}/>
                             <div className="add-product">
                                 <button
                                     className="flex items-center justify-center text-heading-sm text-green-200 border-[1px] rounded-[4px] bg-green-150 px-[10px] py-[5px]">
