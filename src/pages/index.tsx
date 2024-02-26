@@ -1,9 +1,18 @@
-import {Banner, BestSellersSlider, FeaturedCategories, IconBox, Section, SimpleProductSlider} from "@/components";
+import {
+    Banner,
+    BestSellersSlider,
+    DealsOfDay,
+    FeaturedCategories,
+    IconBox, ProductDealsCard,
+    Section,
+    SimpleProductSlider
+} from "@/components";
 import {MiniProductSlider} from "@/components/pages/mini-product-slider";
 import {popularProducts} from "@/mock/PopularProducts";
 import {popularFruits} from "@/mock/PopularFruits";
 import Link from "next/link";
 import {BestSellers} from "@/mock/BestSellers";
+import {DealsOfTheDaysMock} from "@/mock/DealsOfTheDays";
 
 export default function Home() {
   return (
@@ -16,7 +25,7 @@ export default function Home() {
              />
          </Section>
          <Section>
-             <div className="hidden sm:flex mb-[50px]">
+             <div className="hidden sm:flex mb-5">
                  <h2 className="text-heading3 text-blue-300">Featured Categories</h2>
              </div>
              <FeaturedCategories/>
@@ -25,7 +34,7 @@ export default function Home() {
              <MiniProductSlider/>
          </Section>
          <Section>
-             <div className="flex justify-between mb-[50px]">
+             <div className="flex justify-between mb-5">
                  <h2 className="text-heading3 text-blue-300">Popular Products</h2>
                  <div className="flex items-center gap-3">
                      <i className="swiper-nav-left icon-angle-small-left cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white text-[24px]"></i>
@@ -35,7 +44,7 @@ export default function Home() {
              <SimpleProductSlider  nextElem={".swiper-nav-right"} prevElem={".swiper-nav-left"} sliderData={popularProducts}/>
          </Section>
          <Section>
-             <div className="flex justify-between mb-[50px]">
+             <div className="flex justify-between mb-5">
                  <h2 className="text-heading3 text-blue-300">Popular Fruits</h2>
                  <div className="flex items-center gap-3">
                      <i className="swiper-left2 icon-angle-small-left cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white text-[24px]"></i>
@@ -45,7 +54,7 @@ export default function Home() {
              <SimpleProductSlider nextElem={".swiper-left2"} prevElem={".swiper-right2"} sliderData={popularFruits}/>
          </Section>
          <Section>
-             <div className="flex justify-between mb-[50px]">
+             <div className="flex justify-between mb-5">
                  <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">
                      Best Sellers
                  </h2>
@@ -62,6 +71,17 @@ export default function Home() {
                      <BestSellersSlider sellersData={BestSellers}/>
                  </div>
              </div>
+         </Section>
+         <Section>
+             <div className="flex justify-between items-center mb-5">
+                 <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">
+                     Deals Of The Days</h2>
+                 <Link className="flex items-center" href="#">
+                     All Deals
+                     <IconBox className={"icon-angle-small-right"} size={24}></IconBox>
+                 </Link>
+             </div>
+             <DealsOfDay sliderData={DealsOfTheDaysMock}/>
          </Section>
      </>
 
