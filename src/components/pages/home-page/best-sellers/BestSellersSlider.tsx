@@ -1,23 +1,29 @@
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, Navigation} from "swiper/modules";
+import {Autoplay} from "swiper/modules";
 import {SimpleProductCard} from "@/components";
 
-interface Props{
-    sliderData: Array<any>,
-    nextElem?: string,
-    prevElem?: string
+interface Props {
+    sellersData: Array<{
+        title: string,
+        image: string
+        category: string,
+        rate: number,
+        weight: number,
+        unit: string,
+        price: number,
+        label: string,
+        sold:number,
+        total: number,
+    }>
 }
-export function SimpleProductSlider({sliderData, nextElem, prevElem}: Props) {
+
+export function BestSellersSlider({sellersData}: Props) {
     return (
         <Swiper
             spaceBetween={16}
             slidesPerView={2}
             autoplay={true}
-            modules={[Autoplay, Navigation]}
-            navigation={{
-                nextEl: nextElem,
-                prevEl: prevElem
-            }}
+            modules={[Autoplay]}
             breakpoints={{
                 768: {
                     slidesPerView: 3,
@@ -26,15 +32,11 @@ export function SimpleProductSlider({sliderData, nextElem, prevElem}: Props) {
                 1024: {
                     slidesPerView: 4,
                     spaceBetween: 22
-                },
-                1280: {
-                    slidesPerView: 5,
-                    spaceBetween: 24
                 }
             }}
         >
             {
-                sliderData.map((item, index)=>{
+                sellersData.map((item, index)=>{
                     return(
                         <SwiperSlide key={index}>
                             <SimpleProductCard cardData={item}/>
@@ -45,4 +47,3 @@ export function SimpleProductSlider({sliderData, nextElem, prevElem}: Props) {
         </Swiper>
     )
 }
-
