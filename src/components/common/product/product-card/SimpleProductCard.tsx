@@ -1,25 +1,14 @@
 import {Badge, IconBox, ImageVeiw, PriceText, Rating} from "@/components";
 import Link from "next/link";
+import {ProductType} from "@/types/ProductType";
 
 interface Props{
-    cardData: {
-        title: string,
-        image: string,
-        category: string,
-        rate: number,
-        weight: number,
-        unit: string,
-        price: number,
-        sale_price?: number,
-        label?: string,
-        total?: number,
-        sold?: number
-    }
+    cardData: ProductType
 }
 
 export function SimpleProductCard({cardData}:Props) {
     return (
-        <div>
+        <>
             <div className="group border-[1px] border-gray-200 hover:border-green-150 rounded-[10px] hover:shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] relative p-3 md:p-4 xl:px-5 xl:pb-5 lg:pt-[65px] h-full">
                 {
                     <Badge badge={cardData.label} price={cardData.price} sale_price={cardData.sale_price}/>
@@ -35,7 +24,7 @@ export function SimpleProductCard({cardData}:Props) {
                         <IconBox className={"icon-eye"} size={15}/>
                     </div>
                 </div>
-                <ImageVeiw src={cardData.image} className="m-auto w-full aspect-[3/2] mb-[28px]" alt={"image"} width={200} height={150}/>
+                <ImageVeiw src={cardData.image} className="m-auto w-full aspect-[3/2] " alt={"image"} width={200} height={150}/>
                 <div className="flex flex-col gap-2">
                     <div className="text-gray-500 text-xsmall">{cardData.category}</div>
                     <Link href={"/"}><h3 className="text-heading-sm text-blue-300 max-h-[50px] overflow-hidden">{cardData.title}</h3></Link>
@@ -86,7 +75,7 @@ export function SimpleProductCard({cardData}:Props) {
                         </div>
                 }
             </div>
-        </div>
+        </>
     );
 }
 

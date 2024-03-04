@@ -1,72 +1,104 @@
-export const featuredCategoriesMock = [
+import {ProductType} from "@/types/ProductType";
+
+export const featuredCategoriesMock:Array<ProductType> = [
     {
         title: 'Cake & Milk',
-        img: '/assets/images/featured/cake-milch.png',
+        image: '/assets/images/featured/cake-milch.png',
         link: '/',
-        color: '#F2FCE4',
-        items: '14'
+        color: "#F2FCE4",
+        rate: 4,
+        price: 2000,
+        items: 14,
+        category: "food"
     },
     {
         title: 'Peach',
-        img: '/assets/images/featured/peach.png',
+        image: '/assets/images/featured/peach.png',
         link: '/',
         color: '#FFFCEB',
-        items: '17'
+        rate: 4,
+        price: 134,
+        items: 23,
+        category: "food"
     },
     {
         title: 'Organic Kiwi',
-        img: '/assets/images/featured/organic-kiwi.png',
+        image: '/assets/images/featured/organic-kiwi.png',
         link: '/',
         color: '#ECFFEC',
-        items: '21'
+        rate: 4,
+        price: 2000,
+        items: 45,
+        category: "food"
     },
     {
         title: 'Red Apple',
-        img: '/assets/images/featured/red-apple.png',
+        image: '/assets/images/featured/red-apple.png',
         link: '/',
         color: '#FEEFEA',
-        items: '68'
+        rate: 4,
+        price: 2000,
+        items: 57,
+        category: "food"
     },
     {
         title: 'Snack',
-        img: '/assets/images/featured/snack.png',
+        image: '/assets/images/featured/snack.png',
         link: '/',
         color: '#FFF3EB',
-        items: '34'
+        rate: 4,
+        price: 2000,
+        items: 74,
+        category: "food"
     },
     {
         title: 'Black plum ',
-        img: '/assets/images/featured/black-plum.png',
+        image: '/assets/images/featured/black-plum.png',
         link: '/',
         color: '#FFF3FF',
-        items: '25'
+        rate: 4,
+        price: 2000,
+        items: 14,
+        category: "food"
     },
     {
         title: 'Vegetables',
-        img: '/assets/images/featured/vegetables.png',
+        image: '/assets/images/featured/vegetables.png',
         link: '/',
         color: '#F2FCE4',
-        items: '65'
+        rate: 4,
+        price: 2000,
+        items: 14,
+        category: "food"
     },
     {
         title: 'Headphone',
-        img: '/assets/images/featured/headphone.png',
+        image: '/assets/images/featured/headphone.png',
         link: '/',
         color: '#FFFCEB',
-        items: '33'
+        rate: 4,
+        price: 2000,
+        items: 14,
+        category: "food"
     },
     {
         title: 'Cake & Milk',
-        img: '/assets/images/featured/snack.png',
+        image: '/assets/images/featured/snack.png',
         link: '/',
         color: '#F2FCE4',
-        items: '54'
+        rate: 4,
+        price: 2000,
+        items: 14,
+        category: "food"
     },
     {
         title: 'Orange',
-        img: '/assets/images/featured/oranges.png',
+        image: '/assets/images/featured/oranges.png',
         link: '/',
         color: '#FFF3FF',
-        items: '63'
+        rate: 4,
+        price: 2000,
+        items: 14,
+        category: "food"
     }
 ]

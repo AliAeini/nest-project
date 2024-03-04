@@ -95,3 +95,7 @@
         accent-color: #3bb77e;
     }
 }
+body{
+    position: relative;
+ }
+

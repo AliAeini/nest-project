@@ -10,10 +10,10 @@ interface Props{
     titleClassName?: string,
     linkClass?: string
     path?: number,
+    menuToggle?: ()=>{}
 }
 
-export function IconBox({className, size = 22, link, title, hideTitleOnMobile = false, badge = 0, titleClassName= "",linkClass = "", path = 0}: Props) {
-
+export function IconBox({className, size = 22, link, title, hideTitleOnMobile = false, badge = 0, titleClassName= "",linkClass = "", path = 0, menuToggle}: Props) {
     let span = []
     for(let i=0; i <= path; i++){
         span.push(
@@ -53,8 +53,7 @@ export function IconBox({className, size = 22, link, title, hideTitleOnMobile = 
                         <i className={`${className} text-[${size}px]`}>{span}</i>
                 }
                 {
-                    title && <div
-                        className={`${hideTitleOnMobile ? "hidden xl:inline-block" : "inline-block"} ${titleClassName}`}>{title}</div>
+                    title && <div className={`${hideTitleOnMobile ? "hidden xl:inline-block" : "inline-block"} ${titleClassName}`} onClick={menuToggle}>{title}</div>
                 }
             </>
         )

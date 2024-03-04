@@ -1,4 +1,6 @@
-export const popularFruits = [
+import {ProductType} from "@/types/ProductType";
+
+export const popularFruits :Array<ProductType> = [
     {
         title: "Angie’s Boomchickapop Sweet & Salty Kettle Corn",
         image: '/assets/images/products/tanjerin.png',
@@ -9,6 +11,7 @@ export const popularFruits = [
         price: 3000,
         sale_price: 200,
         label: 'Sale',
+        link: "#"
     },
     {
         title: "All Natural Italian-Style Chicken Meatballs",
@@ -19,6 +22,7 @@ export const popularFruits = [
         unit: 'gram',
         price: 3000,
         sale_price: 200,
+        link: "#"
     },
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
@@ -28,6 +32,7 @@ export const popularFruits = [
         weight: 500,
         unit: 'gram',
         price: 3000,
+        link: "#"
     },
     {
         title: "Foster Farms Takeout Crispy Classic Buffalo Wings",
@@ -37,7 +42,7 @@ export const popularFruits = [
         weight: 500,
         unit: 'gram',
         price: 3000,
-        sale_price: ''
+        link: "#"
     },
     {
         title: "Blue Diamond Almonds Lightly Salted Vegetables",
@@ -49,6 +54,7 @@ export const popularFruits = [
         price: 3000,
         sale_price: 200,
         label: 'Hot',
+        link: "#"
     },
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
@@ -60,6 +66,6 @@ export const popularFruits = [
         price: 3000,
         sale_price: 200,
         label: 'Hot',
-
-    }
+        link: "#"
+    },
 ];

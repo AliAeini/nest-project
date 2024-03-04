@@ -1,4 +1,6 @@
-export const popularProducts = [
+import {ProductType} from "@/types/ProductType";
+
+export const popularProducts :Array<ProductType> = [
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
         image: '/assets/images/products/mango.png',
@@ -9,7 +11,7 @@ export const popularProducts = [
         price: 5000,
         sale_price: 200,
         label: 'Hot',
-
+        link: "#"
     },
     {
         title: "All Natural Italian-Style Chicken Meatballs",
@@ -21,6 +23,7 @@ export const popularProducts = [
         price: 6000,
         sale_price: 22200,
         label: 'Hot',
+        link: "#"
     },
     {
         title: "Angie’s Boomchickapop Sweet & Salty Kettle Corn",
@@ -32,6 +35,7 @@ export const popularProducts = [
         price: 3000,
         sale_price: 200,
         label: 'Sale',
+        link: "#"
     },
     {
         title: "Foster Farms Takeout Crispy Classic Buffalo Wings",
@@ -42,6 +46,7 @@ export const popularProducts = [
         unit: 'gram',
         price: 3000,
         sale_price: 200,
+        link: "#"
     },
     {
         title: "Blue Diamond Almonds Lightly Salted Vegetables",
@@ -53,6 +58,7 @@ export const popularProducts = [
         price: 3000,
         sale_price: 200,
         label: 'Sale',
+        link: "#"
     },
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
@@ -63,5 +69,6 @@ export const popularProducts = [
         unit: 'gram',
         price: 3000,
         sale_price: 200,
+        link: "#"
     }
 ];

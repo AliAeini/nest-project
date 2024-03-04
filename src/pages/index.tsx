@@ -3,7 +3,7 @@ import {
     BestSellersSlider,
     DealsOfDay,
     FeaturedCategories,
-    IconBox, ProductDealsCard, ProductListSlider,
+    IconBox, ProductListSlider,
     Section,
     SimpleProductSlider
 } from "@/components";
@@ -13,6 +13,7 @@ import {popularFruits} from "@/mock/PopularFruits";
 import Link from "next/link";
 import {BestSellers} from "@/mock/BestSellers";
 import {DealsOfTheDaysMock} from "@/mock/DealsOfTheDays";
+
 
 export default function Home() {
   return (
@@ -86,6 +87,7 @@ export default function Home() {
          <Section>
              <ProductListSlider/>
          </Section>
+         {/*<ShopCategory products={popularFruits} pulpular_items={TopRatedMock}/>*/}
      </>
 
   );

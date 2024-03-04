@@ -1,8 +1,16 @@
 import {IconBox, Logo, Menu, SearchForm} from "@/components";
 import Link from "next/link";
-import { twMerge } from 'tailwind-merge'
+import {useState} from "react";
 
-export function Header() {
+interface Props{
+    menuLinks: Array<any>,
+    list_categories: Array<any>
+}
+export function Header({menuLinks, list_categories}: Props) {
+    const [menuState, setMenuState] = useState(false)
+    const menuToggle = (): any => {
+        menuState ? setMenuState(false) : setMenuState(true)
+    }
     return (
         <header className="mb-[33px]">
             <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
@@ -25,8 +33,8 @@ export function Header() {
                 </button>
             </div>
             <div className="border-gray-200 border-y h">
-                <div className=" container transition-all w-4/5 rounded-[24px] lg:rounded-[0px] lg:w-auto flex absolute top-0 bottom-0 -left-[100%] lg:static flex-col lg:flex-row justify-start lg:justify-between items-start pt-[16px] pl-[24px] lg:py-[13px] lg:items-center h-[100vh] bg-white lg:h-[70px] mobile-menu z-50">
-                    <Menu/>
+                <div className="container transition-all w-4/5 rounded-[24px] lg:rounded-[0px] lg:w-auto flex absolute top-0 bottom-0 -left-[100%] lg:static flex-col lg:flex-row justify-start lg:justify-between items-start pt-[16px] pl-[24px] lg:py-[13px] lg:items-center h-[100vh] bg-white lg:h-[70px] mobile-menu z-50">
+                    <Menu menuToggle={menuToggle} menuState={menuState} menuLinks={menuLinks} list_categories={list_categories}/>
                     <div className="hidden lg:flex items-center shrink-0 gap-3">
                         <IconBox className={"icon-headset xl:text-[32px] 2xl:text-[36px] aspect-square"} size={30} link={"#"}/>
                         <div>
