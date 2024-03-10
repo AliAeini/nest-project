@@ -36,7 +36,7 @@ export function Header({menuLinks, list_categories}: Props) {
                 <div className="container transition-all w-4/5 rounded-[24px] lg:rounded-[0px] lg:w-auto flex absolute top-0 bottom-0 -left-[100%] lg:static flex-col lg:flex-row justify-start lg:justify-between items-start pt-[16px] pl-[24px] lg:py-[13px] lg:items-center h-[100vh] bg-white lg:h-[70px] mobile-menu z-50">
                     <Menu menuToggle={menuToggle} menuState={menuState} menuLinks={menuLinks} list_categories={list_categories}/>
                     <div className="hidden lg:flex items-center shrink-0 gap-3">
-                        <IconBox className={"icon-headset xl:text-[32px] 2xl:text-[36px] aspect-square"} size={30} link={"#"}/>
+                        <IconBox className={"icon-headset xl:text-[32px] 2xl:text-[36px] aspect-square"} size={30} link={"product"}/>
                         <div>
                             <Link href="tel:19008888"
                                className="text-green-200 lg:text-heading6 xl:text-heading5 2xl:text-heading4">1900-8888</Link>
