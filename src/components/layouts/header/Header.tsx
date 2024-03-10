@@ -20,10 +20,10 @@ export function Header({menuLinks, list_categories}: Props) {
                 </div>
                 <ul className="hidden lg:flex gap-5">
                     <li className="flex gap-2">
-                        <IconBox className={"icon-user"} size={24} link={"#"} title={"Account"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                        <IconBox className={"icon-user"} size={24} link={"login"} title={"Account"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato"}/>
                     </li>
                     <li className="flex gap-2">
-                        <IconBox className={"icon-shopping-cart"} size={24} title={"Card"} hideTitleOnMobile={true} badge={5} link={"#"} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                        <IconBox className={"icon-shopping-cart"} size={24} title={"Card"} hideTitleOnMobile={true} badge={5} link={"userBasket"} titleClassName={"text-medium text-gray-500 font-lato"}/>
                     </li>
                 </ul>
                 <button id="menu_btn" className="flex flex-col justify-between py-[4px] lg:hidden w-[24px] h-[24px]">
@@ -52,14 +52,13 @@ export function Header({menuLinks, list_categories}: Props) {
                     </div>
                     <ul className="flex gap-5">
                         <li className="flex gap-2 cursor-pointer">
-                            <Link href="#"><i className="icon-user text-[24px]"></i></Link>
+                            <IconBox className={"icon-user"} size={24} link={"login"}/>
                             <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">Account</div>
                         </li>
                         <li className="flex gap-2 cursor-pointer">
                             <div className="relative">
-                                <span
-                                    className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">4</span>
-                                <Link href="#"><i className="icon-shopping-cart text-[24px]"></i></Link>
+                                <span className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">4</span>
+                                <IconBox className={"icon-shopping-cart"} size={24}/>
                             </div>
                             <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">Card</div>
                         </li>

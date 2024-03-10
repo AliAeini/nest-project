@@ -1,13 +1,13 @@
 import {IconBox, ImageVeiw, PriceText, Rating, Section, SimpleProductCard} from "@/components";
 import Link from "next/link";
-import {ProductType} from "@/types/ProductType";
+import {popularProducts} from "@/mock/PopularProducts";
+import {RecentlyAddedMock} from "@/mock/RecentlyAdded";
 
 interface Props {
-    products: Array<ProductType>,
-    pulpular_items: Array<ProductType>
+
 };
 
-export function ShopCategory({products, pulpular_items}: Props) {
+export default function ShopCategory({}: Props) {
     return (
         <>
             <Section className="mb-[68px]">
@@ -85,7 +85,7 @@ export function ShopCategory({products, pulpular_items}: Props) {
                         <p className="text-heading4 font-quickSand mb-[14px] pb-[14px] border-b-2">Popular Items</p>
                         <div className="flex flex-col gap-6">
                             {
-                                pulpular_items.map((item, index)=>{
+                                RecentlyAddedMock.map((item, index)=>{
                                     return (
                                         <Link className="flex gap-3 lg:gap-5 w-full" key={index} href={item.link}>
                                             <ImageVeiw src={item.image} alt={"#"} width={100} height={90} className={"block aspect-square w-[90px] flex-shrink-0 flex-grow-0"}/>
@@ -103,7 +103,7 @@ export function ShopCategory({products, pulpular_items}: Props) {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col justify-around">
+                <div className="">
                     <div className="flex justify-between rounded-[15px] bg-gray-200 py-[15px] lg:py-[45px] ps-[30px] mb-[48px] h-fit w-full">
                         <div className="text-heading6 lg:text-heading5 text-gray-500">There are <span
                             className="text-blue-200">568</span> products in this category
@@ -115,9 +115,9 @@ export function ShopCategory({products, pulpular_items}: Props) {
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 mb-[45px] px-4">
                         {
-                            products.map((pruduct, index) => {
+                            popularProducts.map((pruduct, index) => {
                                 return (
-                                    <div className="col-span-1 w-[350px] mx-auto" key={index}>
+                                    <div className="col-span-1 max-w-[350px] mx-auto" key={index}>
                                         <SimpleProductCard cardData={pruduct}/>
                                     </div>
                                 )
@@ -126,24 +126,18 @@ export function ShopCategory({products, pulpular_items}: Props) {
                     </div>
                     <div className="w-full text-center">
                         <div className="flex gap-4 justify-center items-center p-2">
-                            <button type={"submit"}
-                                    className="p-1 px-2.5 bg-gray-300 rounded-full font-semibold text-lg">
+                            <button type={"button"} className="p-1 px-2.5 bg-gray-300 rounded-full font-semibold text-lg">
                                 <IconBox className={"icon-angle-small-left"}/>
                             </button>
-                            <button type={"submit"}
-                                    className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
+                            <button type={"button"} className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
                             </button>
-                            <button type={"submit"}
-                                    className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
+                            <button type={"button"} className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
                             </button>
-                            <button type={"submit"}
-                                    className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
+                            <button type={"button"} className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
                             </button>
-                            <button type={"submit"}
-                                    className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
+                            <button type={"button"} className="p-1 px-3.5 bg-gray-300 rounded-full font-semibold text-lg">5
                             </button>
-                            <button type={"submit"}
-                                    className="p-1 px-2.5 bg-gray-300 rounded-full font-semibold text-lg">
+                            <button type={"button"} className="p-1 px-2.5 bg-gray-300 rounded-full font-semibold text-lg">
                                 <IconBox className={"icon-angle-small-right"}/>
                             </button>
                         </div>

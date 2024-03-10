@@ -4,7 +4,7 @@ interface Props {
 
 }
 
-export function userBasket(props: Props) {
+export default function userBasket(props: Props) {
     return (
         <>
             <Section className="py-4 md:py-8 flex flex-col gap-4 md:gap-6 border rounded-[30px] md:m-8">
@@ -97,7 +97,7 @@ export function userBasket(props: Props) {
                                 <p>Continue Shoping</p>
                             </button>
                             <button type={"submit"} className="flex flex-row items-center gap-2 max-w-fit text-base md:text-xl font-[600] traking-[0px] bg-primary px-2 md:px-4 py-1 md:py-2 rounded-md text-white hover:bg-yellow-100 transition-all duration-100">
-                                <IconBox className={"icon-bell text-white"} />
+                                <IconBox className={"icon-edit text-white"} />
                                 <p>Update</p>
                             </button>
                         </div>
