@@ -6,6 +6,9 @@ import {Lato, Quicksand} from "next/font/google";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
+import "react-toastify/dist/ReactToastify.min.css"
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {ToastContainer} from "react-toastify";
 
 
 const quicksand = Quicksand({
@@ -17,6 +20,15 @@ const lato = Lato({
     variable: "--font-lato"
 })
 export default function App({ Component, pageProps }: AppProps) {
+    const queryClint = new QueryClient({
+        defaultOptions:{
+            queries:{
+                refetchOnWindowFocus: false,
+                refetchIntervalInBackground: false,
+                retry: false
+            }
+        }
+    })
   return (
       <>
           <style jsx global>{`
@@ -25,9 +37,12 @@ export default function App({ Component, pageProps }: AppProps) {
                   --font-lato : ${lato.style.fontFamily}, sans-serif;
               }
           `}</style>
-          <Layouts>
-              <Component {...pageProps} />
-          </Layouts>
+          <QueryClientProvider  client={queryClint}>
+              <Layouts>
+                  <Component {...pageProps}/>
+                  <ToastContainer autoClose={false} hideProgressBar={false} closeOnClick={true} draggable={false} theme={"light"} position={"top-right"}/>
+              </Layouts>
+          </QueryClientProvider>
       </>
   );
 }

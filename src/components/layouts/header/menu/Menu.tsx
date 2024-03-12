@@ -1,42 +1,50 @@
 import Link from "next/link";
 import {IconBox} from "@/components";
+import {MenuItemType} from "@/types";
+import {EntityType} from "@/types/api/Response";
+import {useMenu} from "@/hooks/use-menu";
+import {useEffect, useState, MouseEvent} from "react";
+import {useOverlay} from "@/hooks/use-overlay";
 
-interface Props{
-    list_categories:Array<{
-        title: string,
-        link: string,
-        icon:string
-        path: number,
-    }>
-    menuLinks: Array<
-        {
-            icon: string,
-            title:string,
-            link: string
-        }
-    >,
-    menuToggle: ()=>{}
-    menuState: boolean
-}
-export function Menu( {menuToggle, menuState, menuLinks, list_categories}:Props) {
+export function Menu() {
+    const [menuState, setMenuState] = useState(false)
+    const menuBtnToggle = (e:MouseEvent) => {
+        e.stopPropagation()
+       setMenuState((prevState) => !prevState)
+    }
+    const menuBodyToggle = (e:MouseEvent) => {
+        e.stopPropagation()
+    }
+    useOverlay({
+        onClick: ()=>{
+            setMenuState(false)
+        },
+        isOverFlowHidden: menuState
+    })
+    const { data: mainMenuItems} = useMenu({position:"main_menu"})
+    const { data: BrowsCategoryMenu} = useMenu({position:"brows-category"})
+
     return (
         <>
-            <div id="all_categories" className="hidden lg:flex relative cursor-pointer bg-green-200 gap-2.5 text-white px-3 py-2 rounded-[5px] items-center">
-                <IconBox className={"icon-apps"} size={24} title={"Browse All Categories"} titleClassName={"text-medium"} menuToggle={menuToggle}/>
-                <IconBox className={`icon-angle-small-down transition-all duration-300 ${menuState && " rotate-180"}`} size={24}/>
+            <div className="relative ">
+                <div onClick={menuBtnToggle} className="flex items-center gap-2.5 bg-green-200 text-white px-3 py-2 cursor-pointer rounded-[5px] w-fit">
+                    <IconBox className={"icon-apps"} size={23} title={"Browse All Categories"} titleClassName={"text-medium"}/>
+                    <IconBox className={`icon-angle-small-down transition-all duration-300 ${menuState && " rotate-180"}`} size={23}/>
+                </div>
                 {
                     menuState &&
-                    <div id="all_categories_box" className="flex absolute z-20 bg-white left-0 top-16 w-[550px] border-[1px] border-light_gray rounded-[5px] p-7 hover:cursor-default">
-                        <div id="all_cat_inner_box" className="flex flex-wrap justify-between gap-4">
+                    <div onClick={menuBodyToggle} className="flex lg:text-center lg:absolute z-20 bg-white left-0 top-16 border-b lg:border border-gray-200 rounded-[5px] py-3 lg:p-6 hover:cursor-default">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 w-fit lg:w-[550px] bg-white">
                             {
-                                list_categories.map((item, index) => {
-                                    return <IconBox key={index} link={item.link} className={item.icon}
-                                                    path={item.path} title={item.title} size={35}
+                                BrowsCategoryMenu &&
+                                BrowsCategoryMenu.data.map((item:EntityType<MenuItemType>, index) => {
+                                    return <IconBox key={index} link={item.attributes.link} className={item.attributes.icon_name +" text-[26px]"}
+                                                    path={item.attributes.icon_path} title={item.attributes.title} size={30}
                                                     titleClassName={"text-heading-sm text-blue-300"}
-                                                    linkClass={"gap-3.5 rounded-[5px] shadow-sm shadow-primary hover:shadow-md hover:scale-[99%] p-4 basis-[calc(50%-8px)]"}/>
+                                                    linkClass={"col-span-1 gap-3.5 rounded-[5px] lg:border lg:shadow-sm lg:shadow-primary hover:shadow-md hover:scale-[99%] p-3 items-center"}/>
                                 })
                             }
-                            <div id="more_categories" className="cursor-pointer flex gap-4 items-center justify-center w-full p-3 rounded-[5px] shadow-sm shadow-primary hover:shadow-md hover:scale-[99%]">
+                            <div className="col-span-full hidden lg:flex cursor-pointer gap-4 items-center justify-center p-3 rounded-[5px] shadow-sm shadow-primary hover:shadow-md hover:scale-[99%]">
                                 <IconBox className={"icon-add"} size={24}/>
                                 <div className="text-heading-sm text-blue-300">More Categories</div>
                             </div>
@@ -47,14 +55,15 @@ export function Menu( {menuToggle, menuState, menuLinks, list_categories}:Props)
             <nav id="main_menu">
                 <ul className="flex flex-col lg:flex-row items-start lg:items-center text-heading6 lg:text-heading-sm 2xl:text-heading6 gap-[32px] mt-[32px] lg:mt-0 lg:gap-3 xl:gap-5 2xl:gap-10">
                     {
-                        menuLinks.map((item, index) => {
+                        mainMenuItems &&
+                        mainMenuItems.data.map((item:EntityType<MenuItemType> , index) => {
                             return (
                                 <li key={index}>
                                     {
-                                        item.icon ?
-                                            <IconBox className={item.icon} title={item.title} link={item.link} size={24}/>
+                                        item.attributes.icon_name ?
+                                            <IconBox className={item.attributes.icon_name} title={item.attributes.title} link={item.attributes.link} size={24}/>
                                             :
-                                            <Link href={item.link}>{item.title}</Link>
+                                            <Link href={item.attributes.link}>{item.attributes.title}</Link>
                                     }
                                 </li>
                             )
