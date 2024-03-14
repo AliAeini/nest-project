@@ -1,5 +1,5 @@
 interface Props{
-    badge?: string,
+    badge?: string | null,
     price: number,
     sale_price?: number
 }

@@ -1,18 +1,18 @@
 import Image from "next/image";
 
 interface Props {
-    src: string,
+    src?: string | null,
     alt: string,
     width: number,
     height: number,
     className?: string
 };
 
-export function ImageVeiw({src, alt, width, height, className = ""}: Props) {
-    const isRemote = src.substring(0, 8) == "/uploads"
-    if(src.length > 0) {
+export function ImageVeiw({src = "", alt, width, height, className = ""}: Props) {
+    const imageSrc = src ? (src.startsWith("/uploads") ? "https://nest.navaxcollege.com"+ src : src) : ""
+    if(src && src.length > 0) {
         return (
-            <Image src={`${isRemote ? "https://nest.navaxcollege.com" + src : src}`} alt={alt} width={width} height={height} className={className}/>
+            <Image src={imageSrc} alt={alt} width={width} height={height} className={className}/>
         );
     }else{
         return (
