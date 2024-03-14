@@ -3,7 +3,7 @@ import {IconBox} from "@/components";
 import {MenuItemType} from "@/types";
 import {EntityType} from "@/types/api/Response";
 import {useMenu} from "@/hooks/use-menu";
-import {useEffect, useState, MouseEvent} from "react";
+import {useState, MouseEvent} from "react";
 import {useOverlay} from "@/hooks/use-overlay";
 
 export function Menu() {
