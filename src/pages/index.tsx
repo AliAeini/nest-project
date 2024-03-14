@@ -8,7 +8,6 @@ import {
     SimpleProductSlider
 } from "@/components";
 import {MiniProductSlider} from "@/components/pages/mini-product-slider";
-import {popularFruits} from "@/mock/PopularFruits";
 import Link from "next/link";
 import {BestSellers} from "@/mock/BestSellers";
 import {DealsOfTheDaysMock} from "@/mock/DealsOfTheDays";
@@ -20,9 +19,13 @@ import {ProductType} from "@/types/api/Product";
 
 export default function Home() {
     const {data : popularProductsData} = useQuery<ApiResponseType<ProductType>>(
-        {queryKey:[getAllProductApiCall.name],
-        queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular: true}})
-    })
+        {queryKey:[getAllProductApiCall.name, "popularProduct"],
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular: true}})
+        })
+    const {data : popularFruitData} = useQuery<ApiResponseType<ProductType>>(
+        {queryKey:[getAllProductApiCall.name, "fruitProduct"],
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular:false, is_popular_fruit: true}})
+        })
   return (
      <>
          <Section>
@@ -42,7 +45,7 @@ export default function Home() {
              <MiniProductSlider/>
          </Section>
          <Section>
-             <div className="flex justify-between mb-5">
+             <div className="flex justify-between mb-5 h-fit">
                  <h2 className="text-heading3 text-blue-300">Popular Products</h2>
                  <div className="flex items-center gap-3">
                      <i className="swiper-nav-left icon-angle-small-left cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white text-[24px]"></i>
@@ -51,16 +54,19 @@ export default function Home() {
              </div>
              {popularProductsData && <SimpleProductSlider  nextElem={".swiper-nav-right"} prevElem={".swiper-nav-left"} sliderData={popularProductsData.data}/>}
          </Section>
-         {/*<Section>*/}
-         {/*    <div className="flex justify-between mb-5">*/}
-         {/*        <h2 className="text-heading3 text-blue-300">Popular Fruits</h2>*/}
-         {/*        <div className="flex items-center gap-3">*/}
-         {/*            <i className="swiper-left2 icon-angle-small-left cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white text-[24px]"></i>*/}
-         {/*            <i className="swiper-right2 icon-angle-small-right cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white text-[24px]"></i>*/}
-         {/*        </div>*/}
-         {/*    </div>*/}
-         {/*    <SimpleProductSlider nextElem={".swiper-left2"} prevElem={".swiper-right2"} sliderData={popularFruits}/>*/}
-         {/*</Section>*/}
+         <Section>
+             <div className="flex justify-between mb-5 h-fit">
+                 <h2 className="text-heading3 text-blue-300">Popular Fruits</h2>
+                 <div className="flex items-center gap-3">
+                     <i className="swiper-left2 icon-angle-small-left cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white text-[24px]"></i>
+                     <i className="swiper-right2 icon-angle-small-right cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white text-[24px]"></i>
+                 </div>
+             </div>
+             {
+                 popularFruitData &&
+                 <SimpleProductSlider nextElem={".swiper-left2"} prevElem={".swiper-right2"} sliderData={popularFruitData.data}/>
+             }
+         </Section>
          {/*<Section>*/}
          {/*    <div className="flex justify-between mb-5">*/}
          {/*        <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">*/}
