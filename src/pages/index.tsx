@@ -9,7 +9,6 @@ import {
 } from "@/components";
 import {MiniProductSlider} from "@/components/pages/mini-product-slider";
 import Link from "next/link";
-import {BestSellers} from "@/mock/BestSellers";
 import {DealsOfTheDaysMock} from "@/mock/DealsOfTheDays";
 import {getAllProductApiCall} from "@/api/Product";
 import {useQuery} from "@tanstack/react-query";
@@ -19,12 +18,20 @@ import {ProductType} from "@/types/api/Product";
 
 export default function Home() {
     const {data : popularProductsData} = useQuery<ApiResponseType<ProductType>>(
-        {queryKey:[getAllProductApiCall.name, "popularProduct"],
-            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular: true}})
+        {queryKey:["popularProduct", getAllProductApiCall.name],
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular: {$eq: true}}})
         })
     const {data : popularFruitData} = useQuery<ApiResponseType<ProductType>>(
-        {queryKey:[getAllProductApiCall.name, "fruitProduct"],
-            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular:false, is_popular_fruit: true}})
+        {queryKey:["fruitProduct",getAllProductApiCall.name],
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular_fruit: {$eq: true}}})
+        })
+    const {data : bestSellerData} = useQuery<ApiResponseType<ProductType>>(
+        {queryKey:["bestSellerData", getAllProductApiCall.name],
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_best_seller: {$eq: true}}})
+        })
+    const {data : dealsOfDayData} = useQuery<ApiResponseType<ProductType>>(
+        {queryKey:["dealsOfDayData", getAllProductApiCall.name],
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{discount_expire_date: {notNull: true}}})
         })
   return (
      <>
@@ -63,40 +70,42 @@ export default function Home() {
                  </div>
              </div>
              {
-                 popularFruitData &&
-                 <SimpleProductSlider nextElem={".swiper-left2"} prevElem={".swiper-right2"} sliderData={popularFruitData.data}/>
+                 popularFruitData && <SimpleProductSlider nextElem={".swiper-left2"} prevElem={".swiper-right2"} sliderData={popularFruitData.data}/>
              }
          </Section>
-         {/*<Section>*/}
-         {/*    <div className="flex justify-between mb-5">*/}
-         {/*        <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">*/}
-         {/*            Best Sellers*/}
-         {/*        </h2>*/}
-         {/*    </div>*/}
-         {/*    <div className="flex gap-[24px]">*/}
-         {/*        <div className="bg-[url('/assets/images/bg-leaf.png')] bg-no-repeat bg-bottom bg-[#3BB77E] rounded-[10px] shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] p-12 pt-[38px] self-stretch flex-col justify-between max-w-[370px] hidden xl:flex">*/}
-         {/*            <h3 className="text-heading2 text-blue-300">Bring nature into your home</h3>*/}
-         {/*            <Link href="#" className="mt-6 pl-[15px] pr-2.5 py-2 bg-yellow-100 hover:bg-green-200 rounded-[3px] cursor-pointer inline-flex max-w-max items-center gap-2.5">*/}
-         {/*                <span className="block text-xsmall text-white">Shop now</span>*/}
-         {/*                <IconBox className="icon-arrow-small-right" size={24}/>*/}
-         {/*            </Link>*/}
-         {/*        </div>*/}
-         {/*        <div className="swiper best-seller-slider overflow-hidden">*/}
-         {/*            <BestSellersSlider sellersData={BestSellers}/>*/}
-         {/*        </div>*/}
-         {/*    </div>*/}
-         {/*</Section>*/}
-         {/*<Section>*/}
-         {/*    <div className="flex justify-between items-center mb-5">*/}
-         {/*        <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">*/}
-         {/*            Deals Of The Days</h2>*/}
-         {/*        <Link className="flex items-center" href="#">*/}
-         {/*            All Deals*/}
-         {/*            <IconBox className={"icon-angle-small-right"} size={24}></IconBox>*/}
-         {/*        </Link>*/}
-         {/*    </div>*/}
-         {/*    <DealsOfDay sliderData={DealsOfTheDaysMock}/>*/}
-         {/*</Section>*/}
+         <Section>
+             <div className="flex justify-between mb-5">
+                 <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">
+                     Best Sellers
+                 </h2>
+             </div>
+             <div className="grid grid-cols-3 xl:grid-cols-4 md:gap-6">
+                 <div className="col-span-1 bg-[url('/assets/images/bg-leaf.png')] bg-no-repeat bg-bottom rounded-[10px] shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] p-12 pt-[38px] self-stretch flex-col justify-between hidden xl:flex">
+                     <h3 className="text-heading2 text-blue-300">Bring nature into your home</h3>
+                     <Link href="#" className="mt-6 pl-[15px] pr-2.5 py-2 bg-yellow-100 hover:bg-green-200 rounded-[3px] cursor-pointer inline-flex max-w-max items-center gap-2.5">
+                         <span className="block text-xsmall text-white">Shop now</span>
+                         <IconBox className="icon-arrow-small-right" size={24}/>
+                     </Link>
+                 </div>
+                 <div className="col-span-3">
+                     {
+                         bestSellerData && <BestSellersSlider sellersData={bestSellerData.data}/>
+                     }
+                 </div>
+             </div>
+         </Section>
+         <Section>
+             <div className="flex justify-between items-center mb-5">
+                 <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">Deals Of The Days</h2>
+                 <Link className="flex items-center" href="#">All Deals
+                     <IconBox className={"icon-angle-small-right"} size={24}></IconBox>
+                 </Link>
+             </div>
+             {
+                 dealsOfDayData &&
+                 <DealsOfDay sliderData={dealsOfDayData.data}/>
+             }
+         </Section>
          <Section>
              <ProductListSlider/>
          </Section>
