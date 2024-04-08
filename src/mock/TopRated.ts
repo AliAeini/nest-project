@@ -1,6 +1,5 @@
-import {ProductType} from "@/types/ProductType";
 
-export const TopRatedMock: Array<ProductType> = [
+export const TopRatedMock: Array<any> = [
     {
         title : "Nestle Original Coffee-Mate Coffee Creamer",
         image: "/assets/images/products/avocado.png",

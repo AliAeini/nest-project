@@ -1,6 +1,5 @@
-import {ProductType} from "@/types/ProductType";
 
-export const featuredCategoriesMock:Array<ProductType> = [
+export const featuredCategoriesMock:Array<any> = [
     {
         title: 'Cake & Milk',
         image: '/assets/images/featured/cake-milch.png',

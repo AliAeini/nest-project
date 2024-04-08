@@ -1,26 +1,21 @@
 import {ImageVeiw, PriceText, Rating} from "@/components";
+import {ProductType} from "@/types/api/Product";
+import {EntityType} from "@/types";
+
 
 interface Props{
-    sliderData: {
-        title :string,
-        image: string,
-        rate: number,
-        price: number,
-        sale_price: number
-    }
+    data: EntityType<ProductType>
 }
-export function MiniProductCard({sliderData}: Props) {
+export function MiniProductCard({data}: Props) {
     return (
         <div className="flex gap-3 lg:gap-5">
-            <ImageVeiw src={sliderData.image} alt={"product"} width={120} height={120}/>
-            <div className="flex flex-col justify-between">
-                <div>
-                    <div className="text-heading6 text-blue-300 mb-1">{sliderData.title}</div>
-                    <div className="flex gap-4">
-                        <Rating rate={sliderData.rate}/>
-                    </div>
-                </div>
-                <PriceText price={sliderData.price} sale_price={sliderData.sale_price}/>
+            <ImageVeiw src={data.attributes.thumbnail?.data?.attributes.url} alt={"product"} width={120} height={120} className={"w-[80px] md:w-[100px] aspect-square"}/>
+            <div className="flex flex-col justify-center gap-2">
+                <div className="text-heading6 text-blue-300">{data.attributes.title}</div>
+                 <div className="flex gap-4">
+                     <Rating rate={data.attributes.rate}/>
+                 </div>
+                <PriceText price={data.attributes.price} sale_price={data.attributes.sell_price}/>
             </div>
         </div>
     );

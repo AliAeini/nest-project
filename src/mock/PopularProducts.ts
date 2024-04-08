@@ -1,6 +1,5 @@
-import {ProductType} from "@/types/ProductType";
 
-export const popularProducts :Array<ProductType> = [
+export const popularProducts  = [
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
         image: '/assets/images/products/mango.png',

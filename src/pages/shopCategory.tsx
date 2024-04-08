@@ -1,13 +1,20 @@
 import {IconBox, ImageVeiw, PriceText, Rating, Section, SimpleProductCard} from "@/components";
 import Link from "next/link";
-import {popularProducts} from "@/mock/PopularProducts";
-import {RecentlyAddedMock} from "@/mock/RecentlyAdded";
+import {useQuery} from "@tanstack/react-query";
+import {ApiResponseType} from "@/types";
+import {ProductType} from "@/types/api/Product";
+import {getAllProductApiCall} from "@/api/Product";
+
 
 interface Props {
 
 };
 
 export default function ShopCategory({}: Props) {
+    const {data : popularFruitData} = useQuery<ApiResponseType<ProductType>>(
+        {queryKey:["fruitProduct",getAllProductApiCall.name],
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular_fruit: {$eq: true}}})
+        })
     return (
         <>
             <Section className="mb-[68px]">
@@ -85,16 +92,17 @@ export default function ShopCategory({}: Props) {
                         <p className="text-heading4 font-quickSand mb-[14px] pb-[14px] border-b-2">Popular Items</p>
                         <div className="flex flex-col gap-6">
                             {
-                                RecentlyAddedMock.map((item, index)=>{
+                                popularFruitData &&
+                                popularFruitData.data.map((item, index)=>{
                                     return (
-                                        <Link className="flex gap-3 lg:gap-5 w-full" key={index} href={item.link}>
-                                            <ImageVeiw src={item.image} alt={"#"} width={100} height={90} className={"block aspect-square w-[90px] flex-shrink-0 flex-grow-0"}/>
+                                        <Link className="flex gap-3 lg:gap-5 w-full" key={index} href={"#"}>
+                                            <ImageVeiw src={item.attributes.thumbnail?.data?.attributes.url} alt={"#"} width={100} height={90} className={"block aspect-square w-[90px] flex-shrink-0 flex-grow-0"}/>
                                             <div className="flex flex-col justify-between max-w-[90%] flex-shrink-0">
-                                                <div className="font-quickSand text-heading6 text-blue-300 mb-1">{item.title}</div>
+                                                <div className="font-quickSand text-heading6 text-blue-300 mb-1">{item.attributes.title}</div>
                                                 <div className="flex gap-4">
-                                                    <Rating rate={item.rate}/>
+                                                    <Rating rate={item.attributes.rate}/>
                                                 </div>
-                                                <PriceText price={item.price} sale_price={item.sale_price}/>
+                                                <PriceText price={item.attributes.price} sale_price={item.attributes.sell_price}/>
                                             </div>
                                         </Link>
                                     )
@@ -115,10 +123,11 @@ export default function ShopCategory({}: Props) {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 mb-[45px] px-4">
                         {
-                            popularProducts.map((pruduct, index) => {
+                            popularFruitData &&
+                            popularFruitData.data.map((pruduct, index) => {
                                 return (
-                                    <div className="col-span-1 max-w-[350px] mx-auto" key={index}>
-                                        <SimpleProductCard cardData={pruduct}/>
+                                    <div className="col-span-1 w-[350px] mx-auto" key={index}>
+                                        <SimpleProductCard data={pruduct}/>
                                     </div>
                                 )
                             })

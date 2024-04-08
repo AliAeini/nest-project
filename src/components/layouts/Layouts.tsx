@@ -9,7 +9,7 @@ interface props{
 export function Layouts({children}: props) {
     return (
         <>
-            <Header menuLinks={MenuLinks} list_categories={BrowsCateguryMock}></Header>
+            <Header></Header>
             <main>{children}</main>
             <Footer></Footer>
         </>

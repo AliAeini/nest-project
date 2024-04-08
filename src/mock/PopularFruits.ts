@@ -1,6 +1,5 @@
-import {ProductType} from "@/types/ProductType";
 
-export const popularFruits :Array<ProductType> = [
+export const popularFruits :Array<any> = [
     {
         title: "Angie’s Boomchickapop Sweet & Salty Kettle Corn",
         image: '/assets/images/products/tanjerin.png',

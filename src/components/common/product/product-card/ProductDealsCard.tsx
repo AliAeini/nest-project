@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {TimerHelper} from "@/utils/Timer";
 import {EntityType} from "@/types";
 import {ProductType} from "@/types/api/Product";
+import internal from "node:stream";
 
 interface Props{
     sliderData: EntityType<ProductType>
@@ -15,10 +16,13 @@ export function ProductDealsCard({sliderData}: Props) {
         seconds: 0
     })
     useEffect(()=>{
-        setInterval(()=>{
+        const interval = setInterval(()=>{
             const timer_obj =  TimerHelper(sliderData.attributes.discount_expire_date)
             setRemainTime(timer_obj)
         }, 1000)
+        return ()=>{
+            clearInterval(interval)
+        }
     }, [])
     return (
         <div className="relative h-[438px]">

@@ -9,7 +9,6 @@ import {
 } from "@/components";
 import {MiniProductSlider} from "@/components/pages/mini-product-slider";
 import Link from "next/link";
-import {DealsOfTheDaysMock} from "@/mock/DealsOfTheDays";
 import {getAllProductApiCall} from "@/api/Product";
 import {useQuery} from "@tanstack/react-query";
 import {ApiResponseType} from "@/types";
@@ -109,6 +108,7 @@ export default function Home() {
          <Section>
              <ProductListSlider/>
          </Section>
+         <Link href={"checkOut"}>hhhhhhhhhhhhh</Link>
      </>
   );
 }
