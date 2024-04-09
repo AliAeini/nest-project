@@ -29,7 +29,29 @@ export  function ProductListSlider() {
                 }
             })
         })
+    const {data : topTrending} = useQuery<ApiResponseType<ProductType>>(
+        {queryKey:["topSoldData", getAllProductApiCall.name],
+            queryFn:()=> getAllProductApiCall({
+                populate:["thumbnail"],
+                sort:["sold:desc"],
+                pagination:{
+                    page: 1,
+                    pageSize:3
+                }
+            })
+        })
 
+    const {data : Resently} = useQuery<ApiResponseType<ProductType>>(
+        {queryKey:["topSoldData", getAllProductApiCall.name],
+            queryFn:()=> getAllProductApiCall({
+                populate:["thumbnail"],
+                sort:["sold:desc"],
+                pagination:{
+                    page: 1,
+                    pageSize:3
+                }
+            })
+        })
     return (
         <Swiper
             spaceBetween={16}
@@ -64,17 +86,19 @@ export  function ProductListSlider() {
                      <ProductVerticalList title={"Top Selling"} sliderData={topSoldData.data}/>
                  </SwiperSlide>
              }
-             {/*{*/}
-             {/*    topTrending &&*/}
-             {/*    <SwiperSlide>*/}
-             {/*        <ProductVerticalList title={"Tranding Products"} sliderData={topTrending.data}/>*/}
-             {/*    </SwiperSlide>*/}
-             {/*}*/}
+             {
+                 topTrending &&
+                 <SwiperSlide>
+                     <ProductVerticalList title={"Tranding Products"} sliderData={topTrending.data}/>
+                 </SwiperSlide>
+             }
 
-
-                {/* <SwiperSlide>*/}
-                {/*     <ProductVerticalList title={"Resently Added"} sliderData={RecentlyAddedMock}/>*/}
-                {/* </SwiperSlide>*/}
+             {
+                 Resently &&
+                 <SwiperSlide>
+                     <ProductVerticalList title={"Resently Added"} sliderData={Resently.data}/>
+                 </SwiperSlide>
+             }
          </>
         </Swiper>
     )

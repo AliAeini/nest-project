@@ -7,6 +7,9 @@ import {useState, MouseEvent} from "react";
 import {useOverlay} from "@/hooks/use-overlay";
 
 export function Menu() {
+    const { data: mainMenuItems} = useMenu({position:"main_menu"})
+    const { data: BrowsCategoryMenu} = useMenu({position:"brows-category"})
+
     const [menuState, setMenuState] = useState(false)
     const menuBtnToggle = (e:MouseEvent) => {
         e.stopPropagation()
@@ -21,8 +24,7 @@ export function Menu() {
         },
         isOverFlowHidden: menuState
     })
-    const { data: mainMenuItems} = useMenu({position:"main_menu"})
-    const { data: BrowsCategoryMenu} = useMenu({position:"brows-category"})
+
 
     return (
         <>
@@ -32,8 +34,7 @@ export function Menu() {
                     <IconBox className={`icon-angle-small-down transition-all duration-300 ${menuState && " rotate-180"}`} size={23}/>
                 </div>
                 {
-                    menuState &&
-                    <div onClick={menuBodyToggle} className="flex lg:text-center lg:absolute z-20 bg-white left-0 top-16 border-b lg:border border-gray-200 rounded-[5px] py-3 lg:p-6 hover:cursor-default">
+                    <div onClick={menuBodyToggle} className={`${menuState ? "flex" : "hidden" } lg:text-center lg:absolute z-20 bg-white left-0 top-16 border-b lg:border border-gray-200 rounded-[5px] py-3 lg:p-6 hover:cursor-default`}>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 w-fit lg:w-[550px] bg-white">
                             {
                                 BrowsCategoryMenu &&

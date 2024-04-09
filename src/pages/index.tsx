@@ -10,15 +10,16 @@ import {
 import {MiniProductSlider} from "@/components/pages/mini-product-slider";
 import Link from "next/link";
 import {getAllProductApiCall} from "@/api/Product";
-import {useQuery} from "@tanstack/react-query";
+import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
 import {ApiResponseType} from "@/types";
 import {ProductType} from "@/types/api/Product";
+import {menuApiCall} from "@/api/Menu";
 
 
 export default function Home() {
     const {data : popularProductsData} = useQuery<ApiResponseType<ProductType>>(
         {queryKey:["popularProduct", getAllProductApiCall.name],
-            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular: {$eq: true}}})
+            queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular: {$eq: true}}}),
         })
     const {data : popularFruitData} = useQuery<ApiResponseType<ProductType>>(
         {queryKey:["fruitProduct",getAllProductApiCall.name],
@@ -108,7 +109,21 @@ export default function Home() {
          <Section>
              <ProductListSlider/>
          </Section>
-         <Link href={"checkOut"}>hhhhhhhhhhhhh</Link>
      </>
   );
+}
+
+export async function getServerSideProps(){
+    const queryClient = new QueryClient()
+
+    await queryClient.prefetchQuery({
+        queryKey: [menuApiCall.name],
+        queryFn: menuApiCall
+    })
+    await queryClient.prefetchQuery({
+        queryKey: ["popularProduct", getAllProductApiCall.name],
+        queryFn: ()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular: {$eq: true}}})
+    })
+
+    return {props: {dehydratedState: dehydrate(queryClient)}}
 }

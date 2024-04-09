@@ -7,8 +7,9 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "react-toastify/dist/ReactToastify.min.css"
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {HydrationBoundary, QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ToastContainer} from "react-toastify";
+import {useState} from "react";
 
 
 const quicksand = Quicksand({
@@ -20,15 +21,16 @@ const lato = Lato({
     variable: "--font-lato"
 })
 export default function App({ Component, pageProps }: AppProps) {
-    const queryClint = new QueryClient({
+    const [queryClient] = useState(()=> new QueryClient({
         defaultOptions:{
             queries:{
                 refetchOnWindowFocus: false,
                 refetchIntervalInBackground: false,
-                retry: false
+                retry: false,
+                staleTime: 60 * 1000
             }
         }
-    })
+    }))
   return (
       <>
           <style jsx global>{`
@@ -37,11 +39,13 @@ export default function App({ Component, pageProps }: AppProps) {
                   --font-lato : ${lato.style.fontFamily}, sans-serif;
               }
           `}</style>
-          <QueryClientProvider  client={queryClint}>
+          <QueryClientProvider client={queryClient}>
+              <HydrationBoundary state={pageProps.dehydratedState}>
               <Layouts>
                   <Component {...pageProps}/>
                   <ToastContainer autoClose={false} hideProgressBar={false} closeOnClick={true} draggable={false} theme={"light"} position={"top-right"}/>
               </Layouts>
+              </HydrationBoundary>
           </QueryClientProvider>
       </>
   );
