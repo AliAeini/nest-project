@@ -27,10 +27,10 @@ export function IconBox({className, size = 22, link, title, hideTitleOnMobile = 
                         <div className="relative">
                             <span
                                 className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">{badge}</span>
-                            <i style={{fontSize: size}} className={`${className}`}>{span}</i>
+                            <i className={`${className} cursor-pointer`} style={{fontSize: size}}>{span}</i>
                         </div>
                         :
-                        <i className={`${className} text-[${size}px]`}>{span}</i>
+                        <i className={`${className} cursor-pointer`} style={{fontSize: size}}>{span}</i>
                 }
                 {
                     title && <div
@@ -46,10 +46,10 @@ export function IconBox({className, size = 22, link, title, hideTitleOnMobile = 
                         <div className="relative">
                             <span
                                 className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">{badge}</span>
-                            <i className={`${className} text-[${size}px]`}>{span}</i>
+                            <i className={`${className} cursor-pointer`} style={{fontSize: size}}>{span}</i>
                         </div>
                         :
-                        <i className={`${className} text-[${size}px]`}>{span}</i>
+                        <i className={`${className} cursor-pointer`} style={{fontSize: size}}>{span}</i>
                 }
                 {
                     title && <div className={`${hideTitleOnMobile ? "hidden xl:inline-block" : "inline-block"} ${titleClassName}`}>{title}</div>

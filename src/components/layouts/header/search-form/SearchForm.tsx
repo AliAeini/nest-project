@@ -24,6 +24,7 @@ export function SearchForm({inputclassName = ""}: Props) {
     const{register, handleSubmit, watch} = useForm<formInput>()
     const mutationData = useMutation({mutationFn:(data:filterData)=> getAllProductApiCall({filters:data})})
     const search_text = watch("search_text")
+    const [resultState, setResultState] = useState((false))
 
     useEffect(() => {
          search_text && delay()
@@ -31,8 +32,10 @@ export function SearchForm({inputclassName = ""}: Props) {
 
     const onSubmit= (data:formInput)=>{
         if(data.search_text.length <= 2 ){
+            setResultState(false)
             return
         }
+        setResultState(true)
     mutationData.mutate({
         title:{
             "$containsi": data.search_text
@@ -55,7 +58,7 @@ export function SearchForm({inputclassName = ""}: Props) {
                     className={"icon-search"} size={23}/></button>
             </form>
             {
-                resultData &&
+                resultData && resultState &&
                 <div className="absolute top-14 left-0 w-full bg-white z-[60]">
                     <ul>
                         {
