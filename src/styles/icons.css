@@ -373,7 +373,6 @@
 }
 .icon-eye:before {
     content: '\e910';
-    color: #3bb77e;
 }
 .icon-flame:before {
     content: '\e911';

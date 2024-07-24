@@ -1,23 +1,33 @@
-import {IconBox, Logo, Menu, SearchForm} from "@/components";
+import {IconBox, Logo, Menu, SearchForm, UserInfo} from "@/components";
 import Link from "next/link";
-import {useState, MouseEvent, useContext} from "react";
+import {useState, MouseEvent, useContext, useEffect} from "react";
 import {useOverlay} from "@/hooks/use-overlay";
-import Modal from "@/components/common/ui/modal/Modal";
-import {ModalContext} from "@/utils/ModalContext";
+import {ModalContext} from "@/store/ModalContext";
+import {AuthContext} from "@/store/AuthContext";
 
 
 export function Header() {
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+    const {ModalState, openModalHandler} = useContext(ModalContext)
+    const {is_login} = useContext(AuthContext)
+    const [userName, setUserName] = useState<string>("Account")
 
-    const {ModalState: ModalState, closeModalHandler: closeModalHandler} = useContext(ModalContext)
+    useEffect(() => {
+        if(is_login){
+            setUserName(JSON.parse(window.localStorage.getItem("user")!).username)
+        }else{
+            setUserName("Account")
+        }
+    }, [is_login]);
 
-    const menuBtnClickHandler = (e:any) => {
+    const menuBtnClickHandler = (e:MouseEvent) => {
         e.stopPropagation()
         setShowMobileMenu((prevState) => !prevState)
     }
     const menuBodyClickHandler = (e:MouseEvent) => {
         e.stopPropagation()
     }
+
     useOverlay({
         onClick: ()=>{
             setShowMobileMenu(false)
@@ -25,14 +35,10 @@ export function Header() {
         isOverFlowHidden: showMobileMenu || ModalState
     })
 
-
     return (
         <header className="mb-[33px]">
             {
-                ModalState &&
-                <Modal title={"Register"} onClose={closeModalHandler}>
-                    <p></p>
-                </Modal>
+                is_login && ModalState && <UserInfo/>
             }
             <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
                 <Logo/>
@@ -40,8 +46,13 @@ export function Header() {
                     <SearchForm/>
                 </div>
                 <ul className="hidden lg:flex gap-5">
-                    <li className="flex gap-2">
-                        <IconBox className={"icon-user"} size={24} link={"login"} title={"Account"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                    <li className="flex gap-2 relative">
+                        {
+                            is_login ?
+                                <IconBox className={"icon-user"} size={24} onClick={()=> openModalHandler()} title={userName} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                                :
+                                <IconBox className={"icon-user"} size={24} title={"LOG IN"} link={"/login"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                        }
                     </li>
                     <li className="flex gap-2">
                         <IconBox className={"icon-shopping-cart"} size={24} title={"Card"} hideTitleOnMobile={true} badge={5} link={"userBasket"} titleClassName={"text-medium text-gray-500 font-lato"}/>

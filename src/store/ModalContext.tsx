@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useContext, useState} from "react";
+import {createContext, ReactNode, useState} from "react";
 
 interface Props {
     children: ReactNode
@@ -10,11 +10,11 @@ interface contextProps {
     openModalHandler: () => void
 }
 
-export const ModalContext = createContext<contextProps>({ModalState: true, closeModalHandler: ()=>{}, openModalHandler: ()=>{} })
+export const ModalContext = createContext<contextProps>({ModalState: false, closeModalHandler: ()=>{}, openModalHandler: ()=>{} })
 
 
 export function ModalContextProvider({children}: Props) {
-    const [modalState, setModalState] = useState<false | true>(true)
+    const [modalState, setModalState] = useState<false | true>(false)
 
     const closeModalHandler = ()=>{
         setModalState(false)
@@ -28,3 +28,4 @@ export function ModalContextProvider({children}: Props) {
         </ModalContext.Provider>
     );
 }
+

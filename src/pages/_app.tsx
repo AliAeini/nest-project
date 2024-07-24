@@ -10,7 +10,8 @@ import "react-toastify/dist/ReactToastify.min.css"
 import {HydrationBoundary, QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ToastContainer} from "react-toastify";
 import {useState} from "react";
-import {ModalContextProvider} from "@/utils/ModalContext";
+import {ModalContextProvider} from "@/store/ModalContext";
+import {AuthContext, AuthContextProvider} from "@/store/AuthContext";
 
 
 const quicksand = Quicksand({
@@ -42,12 +43,14 @@ export default function App({ Component, pageProps }: AppProps) {
           `}</style>
           <QueryClientProvider client={queryClient}>
               <HydrationBoundary state={pageProps.dehydratedState}>
-                  <ModalContextProvider>
-                      <Layouts>
-                          <Component {...pageProps}/>
-                          <ToastContainer autoClose={false} hideProgressBar={false} closeOnClick={true} draggable={false} theme={"light"} position={"top-right"}/>
-                      </Layouts>
-                  </ModalContextProvider>
+                  <AuthContextProvider>
+                      <ModalContextProvider>
+                          <Layouts>
+                              <Component {...pageProps}/>
+                              <ToastContainer autoClose={2000} hideProgressBar={true} closeOnClick={true} draggable={false} theme={"light"} position={"top-right"}/>
+                          </Layouts>
+                      </ModalContextProvider>
+                  </AuthContextProvider>
               </HydrationBoundary>
           </QueryClientProvider>
       </>
