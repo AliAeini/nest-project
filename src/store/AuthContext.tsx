@@ -1,5 +1,5 @@
 import { userType } from "@/types";
-import {createContext, ReactNode, useState} from "react";
+import {createContext, ReactNode, useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {useRouter} from "next/router";
 
@@ -15,6 +15,13 @@ interface authContextType{
 export const AuthContext = createContext<authContextType>({is_login: false, login: ()=>{}, logOut: ()=>{}})
 
 export function AuthContextProvider({children}: Props) {
+
+    useEffect(() => {
+        if(window.localStorage.getItem("jwt")){
+            setIsLogin(true)
+        }
+    }, []);
+
     const [isLogin, setIsLogin] = useState(false)
     const router = useRouter()
 
@@ -25,12 +32,14 @@ export function AuthContextProvider({children}: Props) {
         toast.success("login sucssesfully")
         router.push("/")
     }
+
     const logOutHandler = ()=>{
         window.localStorage.removeItem("jwt")
         window.localStorage.removeItem("user")
         setIsLogin(false)
         toast.success("log out sucssesfully")
     }
+
     return (
         <AuthContext.Provider value={{is_login: isLogin, login: loginHandler, logOut: logOutHandler}}>
             {children}

@@ -84,8 +84,12 @@ export function Header() {
                     </div>
                     <ul className="flex gap-5">
                         <li className="flex gap-2 cursor-pointer">
-                            <IconBox className={"icon-user"} size={24} link={"login"}/>
-                            <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">Account</div>
+                            {
+                                is_login ?
+                                    <IconBox className={"icon-user"} size={24} onClick={()=> openModalHandler()} title={userName} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                                    :
+                                    <IconBox className={"icon-user"} size={24} title={"LOG IN"} link={"/login"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                            }
                         </li>
                         <li className="flex gap-2 cursor-pointer">
                             <div className="relative">
