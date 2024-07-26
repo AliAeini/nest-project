@@ -4,7 +4,7 @@ interface Props {
 
 }
 
-export default function userBasket(props: Props) {
+export default function userBasket({}: Props) {
     return (
         <>
             <Section className="py-4 md:py-8 flex flex-col gap-4 md:gap-6 border rounded-[30px] md:m-8">
@@ -15,7 +15,7 @@ export default function userBasket(props: Props) {
                 <div className="col-span-2 rounded-[20px]">
                     <div className="py-1 text-end hidden md:block">
                         <button className="w-fit cursor-pointer">
-                            <IconBox className={"icon-home text-lg  mr-2 font-[500] text-gray-600"} title={"Clear Basket"} titleClassName={"text-lg font-[500] text-gray-700"}/>
+                            <IconBox className={"icon-home mr-2 font-[500] text-gray-600"} title={"Clear Basket"} titleClassName={"text-lg font-[500] text-gray-700"}/>
                         </button>
                     </div>
                     <div>
@@ -34,7 +34,7 @@ export default function userBasket(props: Props) {
                                 className="col-span-1 text-center text-sm lg:text-lg font-[600] hidden sm:inline"></div>
                         </div>
                         <ul className="my-2 md:my-4 flex-flex-col gap-2 md:gap-4">
-                            <li className="grid grid-cols-6 gap-2 md:gap-4 p-4 rounded-[15px] items-center">
+                            <li className="grid grid-cols-6 gap-2 md:gap-4 p-4 rounded-[15px] items-center justify-between">
                                 <div className="col-span-2 font-[700]">
                                     <div className="flex flex-row gap-2 items-center">
                                         <ImageVeiw src={"/assets/images/1 902.png"} alt={"pic"} width={100} height={100}
@@ -47,8 +47,10 @@ export default function userBasket(props: Props) {
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">20.0$</div>
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">2</div>
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">40.0$</div>
-                                <div className="col-span-1 text-end font-[700] text-base lg:text-[17px]">
-                                    <IconBox className={"icon-cross text-[10px] font-bold p-1.5 border-[2px] border-red rounded-full text-red cursor-pointer"} size={25}/>
+                                <div className="col-span-1 flex justify-end font-[700] text-base">
+                                    <IconBox
+                                        className={"icon-cross p-1.5 border-[2px] border-red rounded-full text-red cursor-pointer"}
+                                        size={14}/>
                                 </div>
                             </li>
                             <li className="grid grid-cols-6 gap-2 md:gap-4 p-4 rounded-[15px] items-center">
@@ -64,10 +66,10 @@ export default function userBasket(props: Props) {
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">20.0$</div>
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">2</div>
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">40.0$</div>
-                                <div className="col-span-1 text-end font-[700] text-base lg:text-[17px]">
+                                <div className="col-span-1 flex justify-end font-[700] text-base">
                                     <IconBox
-                                        className={"icon-cross text-[10px] font-bold p-1.5 border-[2px] border-red rounded-full text-red cursor-pointer"}
-                                        size={25}/>
+                                        className={"icon-cross p-1.5 border-[2px] border-red rounded-full text-red cursor-pointer"}
+                                        size={14}/>
                                 </div>
                             </li>
                             <li className="grid grid-cols-6 gap-2 md:gap-4 p-4 rounded-[15px] items-center">
@@ -83,10 +85,8 @@ export default function userBasket(props: Props) {
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">20.0$</div>
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">2</div>
                                 <div className="col-span-1 text-center font-[700] text-base lg:text-[17px]">40.0$</div>
-                                <div className="col-span-1 text-end font-[700] text-base lg:text-[17px]">
-                                    <IconBox
-                                        className={"icon-cross text-[10px] font-bold p-1.5 border-[2px] border-red rounded-full text-red cursor-pointer"}
-                                        size={25}/>
+                                <div className="col-span-1 flex justify-end font-[700] text-base">
+                                    <IconBox className={"icon-cross p-1.5 border-[2px] border-red rounded-full text-red cursor-pointer"} size={14}/>
                                 </div>
                             </li>
                         </ul>

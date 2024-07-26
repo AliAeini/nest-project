@@ -10,11 +10,12 @@ interface Props {
 
 };
 
-export default function ShopCategory({}: Props) {
+export default function Index({}: Props) {
     const {data : popularFruitData} = useQuery<ApiResponseType<ProductType>>(
         {queryKey:["fruitProduct",getAllProductApiCall.name],
             queryFn:()=> getAllProductApiCall({populate:["thumbnail","categories"], filters:{is_popular_fruit: {$eq: true}}})
         })
+
     return (
         <>
             <Section className="mb-[68px]">
@@ -124,10 +125,10 @@ export default function ShopCategory({}: Props) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 mb-[45px] px-4">
                         {
                             popularFruitData &&
-                            popularFruitData.data.map((pruduct, index) => {
+                            popularFruitData.data.map((product, index) => {
                                 return (
                                     <div className="col-span-1 w-[350px] mx-auto" key={index}>
-                                        <SimpleProductCard data={pruduct}/>
+                                        <SimpleProductCard data={product}/>
                                     </div>
                                 )
                             })

@@ -1,6 +1,7 @@
-import {Badge, IconBox, ImageVeiw, PriceText, Rating} from "@/components";
+import {Badge, IconBox, ImageVeiw, PriceText, ProductCounter, Rating} from "@/components";
 import {EntityType} from "@/types";
 import {ProductType} from "@/types/api/Product";
+import Link from "next/link";
 
 interface Props{
     data: EntityType<ProductType>
@@ -25,7 +26,9 @@ export function SimpleProductCard({data}:Props) {
                         <IconBox className={"icon-eye"} size={15}/>
                     </div>
                 </div>
-                <ImageVeiw src={data.attributes.thumbnail?.data?.attributes.url} className="row-span-1 m-auto w-full h-auto aspect-[3/2] " alt={"image"} width={200} height={150}/>
+                <Link href={{pathname: "/products/[id]", query: {id: data.id}}}>
+                    <ImageVeiw src={data.attributes.thumbnail?.data?.attributes.url} className="row-span-1 m-auto w-full h-auto aspect-[3/2] " alt={"image"} width={200} height={150}/>
+                </Link>
                 <div className="grid grid-rows-4">
                     {
                         data.attributes.categories?.data[0] ?
@@ -59,21 +62,7 @@ export function SimpleProductCard({data}:Props) {
                             :
                             <div className="flex items-center justify-between mt-3">
                                 <PriceText price={data.attributes.price} sale_price={data.attributes.sell_price}/>
-                                <div className="add-product">
-                                    <button
-                                        className="flex items-center justify-center text-heading-sm text-green-200 border-[1px] rounded-[4px] bg-green-150 px-[10px] py-[5px]">
-                                        <span className={"hidden sm:inline"}>Add</span>
-                                        +
-                                    </button>
-                                    <div
-                                        className="hidden border-[1px] rounded-[4px] border-green-300 text-green-300 h-[30px] p-[3px]">
-                                        <input type="number" value="1" className="input-product h-[24px] w-[50px] border-0 focus:outline-none text-center"/>
-                                        <div className="flex flex-col justify-between">
-                                            <IconBox className={"up icon-angle-small-up"} size={10}/>
-                                            <IconBox className={"down icon-angle-small-down"} size={10}/>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ProductCounter quentitiyItems={data.attributes.quantity}/>
                             </div>
                     }
                 </div>
