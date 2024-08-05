@@ -12,6 +12,7 @@ import {ToastContainer} from "react-toastify";
 import {useState} from "react";
 import {ModalContextProvider} from "@/store/ModalContext";
 import {AuthContext, AuthContextProvider} from "@/store/AuthContext";
+import {CardContextProvider} from "@/store/CardContext";
 
 
 const quicksand = Quicksand({
@@ -42,16 +43,18 @@ export default function App({ Component, pageProps }: AppProps) {
               }
           `}</style>
           <QueryClientProvider client={queryClient}>
-              <HydrationBoundary state={pageProps.dehydratedState}>
-                  <AuthContextProvider>
-                      <ModalContextProvider>
-                          <Layouts>
-                              <Component {...pageProps}/>
-                              <ToastContainer autoClose={2000} hideProgressBar={true} closeOnClick={true} draggable={false} theme={"light"} position={"top-right"}/>
-                          </Layouts>
-                      </ModalContextProvider>
-                  </AuthContextProvider>
-              </HydrationBoundary>
+              <CardContextProvider>
+                  <HydrationBoundary state={pageProps.dehydratedState}>
+                      <AuthContextProvider>
+                          <ModalContextProvider>
+                              <Layouts>
+                                  <Component {...pageProps}/>
+                                  <ToastContainer autoClose={2000} hideProgressBar={true} closeOnClick={true} draggable={false} theme={"light"} position={"top-right"}/>
+                              </Layouts>
+                          </ModalContextProvider>
+                      </AuthContextProvider>
+                  </HydrationBoundary>
+              </CardContextProvider>
           </QueryClientProvider>
       </>
   );

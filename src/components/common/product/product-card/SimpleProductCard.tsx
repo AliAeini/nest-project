@@ -1,13 +1,16 @@
-import {Badge, IconBox, ImageVeiw, PriceText, ProductCounter, Rating} from "@/components";
+import {Badge, IconBox, ImageVeiw, PriceText, PrimaryButton, ProductItemCounter, Rating} from "@/components";
 import {EntityType} from "@/types";
 import {ProductType} from "@/types/api/Product";
 import Link from "next/link";
+import {useBasket} from "@/hooks/use-basket";
 
 interface Props{
     data: EntityType<ProductType>
 }
 
 export function SimpleProductCard({data}:Props) {
+    const {addItem, updateItem, getItem} = useBasket()
+    const is_in_basket = getItem(data.id)
     return (
         <>
             <div className="grid grid-rows-2 border-[1px] h-full border-gray-200 hover:border-green-150 rounded-[10px] hover:shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] relative p-3 md:p-4 md:py-6 xl:px-5">
@@ -26,7 +29,7 @@ export function SimpleProductCard({data}:Props) {
                         <IconBox className={"icon-eye"} size={15}/>
                     </div>
                 </div>
-                <Link href={{pathname: "/products/[id]", query: {id: data.id}}}>
+                <Link href={{pathname: "/products/[id]", query:{id: data.id}}}>
                     <ImageVeiw src={data.attributes.thumbnail?.data?.attributes.url} className="row-span-1 m-auto w-full h-auto aspect-[3/2] " alt={"image"} width={200} height={150}/>
                 </Link>
                 <div className="grid grid-rows-4">
@@ -51,18 +54,17 @@ export function SimpleProductCard({data}:Props) {
                                     <div style={{width: `${(data.attributes.sold / data.attributes.total) * 100}%`}} className={`bg-green-200 h-[4px] rounded-[2px]`}></div>
                                 </div>
                                 <div className="font-lato text-blue-300 text-xsmall">Sold:{data.attributes.sold}/{data.attributes.total}</div>
-                                <div className="">
-                                    <button
-                                        className="flex justify-center items-center gap-2 xl:text-heading-sm text-white border-[1px] w-full rounded-[4px] bg-green-200 hover:bg-yellow-100 px-2 py-2 lg:py-[14px]">
-                                        <IconBox className="icon-shopping-cart" size={22}></IconBox>
-                                        <span className="text-heading-sm">Add To Card</span>
-                                    </button>
-                                </div>
+                                {
+                                    is_in_basket ?
+                                        <PrimaryButton onClick={()=> updateItem(data.id, "delete")} title={"Remove From Basket"} icon={"crown"} width={"100%"} selected={is_in_basket && true}/>
+                                        :
+                                        <PrimaryButton onClick={()=>addItem(data.id)} title={"Add To Card"} icon={"shopping-cart"} width={"100%"} selected={is_in_basket}/>
+                                }
                             </div>
                             :
                             <div className="flex items-center justify-between mt-3">
                                 <PriceText price={data.attributes.price} sale_price={data.attributes.sell_price}/>
-                                <ProductCounter quentitiyItems={data.attributes.quantity}/>
+                                <ProductItemCounter product={data}/>
                             </div>
                     }
                 </div>

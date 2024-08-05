@@ -1,4 +1,4 @@
-import {ImageVeiw, PriceText, ProductCounter, Rating} from "@/components";
+import {ImageVeiw, PriceText, ProductItemCounter, Rating} from "@/components";
 import {useEffect, useState} from "react";
 import {TimerHelper} from "@/utils/Timer";
 import {EntityType} from "@/types";
@@ -62,7 +62,7 @@ export function ProductDealsCard({sliderData}: Props) {
                     <div className="font-lato text-xsmall text-gray-500 mt-1">{sliderData.attributes.weight} {sliderData.attributes.unit}</div>
                     <div className="flex items-center justify-between mt-3">
                         <PriceText price={sliderData.attributes.price} sale_price={sliderData.attributes.sell_price}/>
-                        <ProductCounter quentitiyItems={sliderData.attributes.quantity}/>
+                        <ProductItemCounter product={sliderData}/>
                     </div>
                 </div>
             </div>

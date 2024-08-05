@@ -22,7 +22,7 @@ export function IconBox({onClick, className, size = 22, link, title, hideTitleOn
     }
     if(link) {
         return (
-            <Link className={`${linkClass} text-nowrap flex flex-nowrap items-center cursor-pointer gap-2 hover:text-primary`} href={link}>
+            <Link className={`${linkClass} text-nowrap flex flex-nowrap items-center cursor-pointer gap-2`} href={link}>
                 {
                     badge ?
                         <div className="relative">
@@ -40,7 +40,7 @@ export function IconBox({onClick, className, size = 22, link, title, hideTitleOn
         );
     }else{
         return (
-            <div onClick={onClick} className="text-nowrap flex flex-nowrap gap-2 items-center cursor-pointer hover:text-primary">
+            <div onClick={onClick} className="text-nowrap flex flex-nowrap gap-2 items-center cursor-pointer">
                 {
                     badge ?
                         <div className="relative">

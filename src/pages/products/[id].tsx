@@ -1,10 +1,11 @@
-import {IconBox, ImageVeiw, PriceText, Rating, Section} from "@/components";
+import {IconBox, ImageVeiw, PriceText, PrimaryButton, Rating, Section} from "@/components";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import {useEffect, useState } from "react";
 import {getAllProductApiCall} from "@/api/Product";
 import {ApiResponseType} from "@/types";
 import {ProductType} from "@/types/api/Product";
+import {useBasket} from "@/hooks/use-basket";
 
 interface Props {
 
@@ -13,6 +14,7 @@ interface Props {
 export default function id({}: Props) {
     const router = useRouter();
     const [ID, setID] = useState<string | string[] | null>(null);
+    const{addItem, getItem, updateItem} = useBasket()
 
     useEffect(() => {
         if (router.query.id) {
@@ -28,6 +30,8 @@ export default function id({}: Props) {
         }),
         enabled: !!ID,
     });
+
+    const is_in_basket = getItem(productDetail?.data[0].id ?? 0)
 
     if(productDetail && productDetail.data.length >= 1){
         return (
@@ -80,7 +84,33 @@ export default function id({}: Props) {
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam culpa deleniti eaque earum et, incidunt itaque, iure labore magnam nesciunt odit quia repellat, sapiente similique tenetur voluptate. Corporis doloribus dolorum enim error, harum repellendus soluta. Aliquid consequatur fugit id labore, nulla obcaecati, omnis, possimus quos sapiente sit velit!</p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad, adipisci aliquam asperiores assumenda beatae dicta distinctio ducimus eius libero natus quam quia quos reiciendis reprehenderit sunt ut velit vitae.</p>
-                        <button className="m-auto mb-0 p-2 sm:p-3 text-heading5 tracking-[1px] text-gray-100 bg-primary rounded-md w-full shadow shadow-primary hover:bg-white hover:text-primary transition-all duration-100">Add To Bascket</button>
+                        <div className="w-full m-auto mb-0 gap-5 flex items-center">
+
+                            <div className="w-[200px] border rounded">
+                                {
+                                    is_in_basket ?
+                                        <div className="flex flex-nowrap gap-2 justify-center items-center">
+                                            <div className="p-2 border-r border-r-gray-200" onClick={()=>updateItem(productDetail.data[0].id, "decrease")}>
+                                                <IconBox className={"down icon-angle-small-down"} size={18}></IconBox>
+                                            </div>
+                                                <p className="w-[80px] p-1 rounded text-center">{is_in_basket ? is_in_basket.quantity : 0}</p>
+                                                <div className="p-2 border-l border-l-gray-200" onClick={()=>updateItem(productDetail.data[0].id, "increase")}>
+                                                    <IconBox className={"up icon-angle-small-up"} size={18}></IconBox>
+                                                </div>
+                                            </div>
+                                            :
+                                            <p className="text-center text-red text-nowrap p-2 text-sm font-[500]">Not In Basket</p>
+
+                                    }
+                                </div>
+
+                            {
+                                is_in_basket ?
+                                    <PrimaryButton onClick={()=> updateItem(productDetail.data[0].id, "delete")} title={"Remove From Basket"} icon={"crown"} width={"100%"} selected={is_in_basket && true}/>
+                                    :
+                                    <PrimaryButton onClick={()=>addItem(productDetail.data[0].id)} title={"Add To Card"} icon={"shopping-cart"} width={"100%"} selected={is_in_basket}/>
+                            }
+                        </div>
                     </div>
                 </div>
             </Section>

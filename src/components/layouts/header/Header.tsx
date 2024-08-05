@@ -4,6 +4,7 @@ import {useState, MouseEvent, useContext, useEffect} from "react";
 import {useOverlay} from "@/hooks/use-overlay";
 import {ModalContext} from "@/store/ModalContext";
 import {AuthContext} from "@/store/AuthContext";
+import {useBasket} from "@/hooks/use-basket";
 
 
 export function Header() {
@@ -11,7 +12,7 @@ export function Header() {
     const {ModalState, openModalHandler} = useContext(ModalContext)
     const {is_login} = useContext(AuthContext)
     const [userName, setUserName] = useState<string>("Account")
-
+    const{basketItems} =useBasket()
     useEffect(() => {
         if(is_login){
             setUserName(JSON.parse(window.localStorage.getItem("user")!).username)
@@ -19,7 +20,6 @@ export function Header() {
             setUserName("Account")
         }
     }, [is_login]);
-
     const menuBtnClickHandler = (e:MouseEvent) => {
         e.stopPropagation()
         setShowMobileMenu((prevState) => !prevState)
@@ -55,7 +55,7 @@ export function Header() {
                         }
                     </li>
                     <li className="flex gap-2">
-                        <IconBox className={"icon-shopping-cart"} size={24} title={"Card"} hideTitleOnMobile={true} badge={5} link={"userBasket"} titleClassName={"text-medium text-gray-500 font-lato"}/>
+                        <IconBox className={"icon-shopping-cart"} size={24} title={"Card"} hideTitleOnMobile={true} badge={basketItems.length} link={"userBasket"} titleClassName={"text-medium text-gray-500 font-lato"}/>
                     </li>
                 </ul>
                 <button onClick={menuBtnClickHandler} className="flex lg:hidden flex-col justify-between py-[4px] w-[24px] h-[24px] cursor-pointer">
@@ -92,10 +92,7 @@ export function Header() {
                             }
                         </li>
                         <li className="flex gap-2 cursor-pointer">
-                            <div className="relative">
-                                <span className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">4</span>
-                                <IconBox className={"icon-shopping-cart"} size={24}/>
-                            </div>
+                            <IconBox className={"icon-shopping-cart"} badge={basketItems.length} size={24}/>
                             <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">Card</div>
                         </li>
                     </ul>
