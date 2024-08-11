@@ -21,7 +21,7 @@ export default function InputField({type = "text", label, register, errors, inva
     }
 
     return (
-        <div className={""}>
+        <div className={"w-full"}>
             {label && <label htmlFor={id}>{label}</label>}
             <div className={`flex justify-between items-center p-1 md:p-2 border ${hasError || invalid ? "border-red" : "focus:border-primary"} rounded w-full`}>
                 <input {...rest} id={id} type={type == "password" && showPass ? "text" : type == "password" && !showPass ? "password" : type} className={` w-full outline-0`} {...register}/>
